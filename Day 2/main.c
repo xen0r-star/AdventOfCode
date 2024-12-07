@@ -7,9 +7,9 @@
 #define NUMBER_LEVEL 10
 
 int main() {
-    FILE *fdat, *fres;
-    fdat = fopen("input.txt", "r");
-    fres = fopen("output.txt", "w");
+    FILE *fileInput, *fileOutput;
+    fileInput = fopen("input.txt", "r");
+    fileOutput = fopen("output.txt", "w");
 
     int numberReportsSafe1 = 0;
     int numberReportsSafe2 = 0;
@@ -20,7 +20,7 @@ int main() {
 
     char line[100];
     int row = 0;
-    while (fgets(line, sizeof(line), fdat)) {
+    while (fgets(line, sizeof(line), fileInput)) {
         int col = 0;
         char *token = strtok(line, " ");
         while (token != NULL) {
@@ -90,28 +90,13 @@ int main() {
         row++;
     }
 
-    fprintf(fres, "|------------------------------|\n");
-    fprintf(fres, "| Total Report Safe 1: %-5ld   |\n", numberReportsSafe1);
+    fprintf(fileOutput, "|------------------------------|\n");
+    fprintf(fileOutput, "| Total Report Safe 1: %-5ld   |\n", numberReportsSafe1);
+    fprintf(fileOutput, "| Total Report Safe 2: %-5ld   |\n", numberReportsSafe2);
+    fprintf(fileOutput, "|------------------------------|\n");
 
+    fclose(fileInput);
+    fclose(fileOutput);
 
-
-
-    // char line[100];
-    // int row = 0;
-    // while (fgets(line, sizeof(line), fdat)) {
-    //     int col = 0;
-    //     char *token = strtok(line, " ");
-    //     while (token != NULL) {
-    //         report[col] = atoi(token);
-    //         col++;
-    //         token = strtok(NULL, " ");
-    //     }
-
-        
-
-    //     row++;
-    // }
-
-    fprintf(fres, "| Total Report Safe 2: %-5ld   |\n", numberReportsSafe2);
-    fprintf(fres, "|------------------------------|\n");
+    return 0;
 }
