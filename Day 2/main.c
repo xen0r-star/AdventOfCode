@@ -7,16 +7,17 @@
 #define NUMBER_LEVEL 10
 
 int main() {
-    // Open file ----------------------------------------------------------------------------------
     FILE *fdat, *fres;
     fdat = fopen("input.txt", "r");
-    fres = fopen("output.res", "w");
+    fres = fopen("output.txt", "w");
 
-    int numberReportsSafe[NUMBER_LINE];
+    int numberReportsSafe1 = 0;
+    int numberReportsSafe2 = 0;
     int report[NUMBER_LEVEL];
 
 
-    // Algorithm ----------------------------------------------------------------------------------
+
+
     char line[100];
     int row = 0;
     while (fgets(line, sizeof(line), fdat)) {
@@ -28,9 +29,32 @@ int main() {
             token = strtok(NULL, " ");
         }
 
-        int securityLevel;
-        int reportOneDelete[NUMBER_LEVEL];
+        int securityLevel = 0;
         int graphReport[NUMBER_LEVEL];
+        for (int i = 0; i < col - 1; i++) {
+            if (abs(report[i] - report[i + 1]) > 3 || report[i] - report[i + 1] == 0) {
+                securityLevel++;
+            }
+
+            if (report[i] - report[i + 1] > 0) {
+                graphReport[i] = 1;
+            } else if (report[i] - report[i + 1] < 0) {
+                graphReport[i] = 2;
+            }
+
+            if (i > 0 && graphReport[i - 1] != graphReport[i]) {
+                securityLevel++;
+            }
+        } 
+
+        if (securityLevel == 0) {
+            numberReportsSafe1++;
+        }
+
+
+
+
+        int reportOneDelete[NUMBER_LEVEL];
 
         for (int h = 0; h < col; h++) {
             int counter = 0;
@@ -58,32 +82,36 @@ int main() {
             }
 
             if (securityLevel == 0) {
-                numberReportsSafe[row] = 1;
+                numberReportsSafe2++;
                 break;
-            } else {
-                numberReportsSafe[row] = 0;
             }
         }
 
         row++;
     }
 
+    fprintf(fres, "|------------------------------|\n");
+    fprintf(fres, "| Total Report Safe 1: %-5ld   |\n", numberReportsSafe1);
 
-    // Print result -------------------------------------------------------------------------------
-    long total = 0;
-    for (int i = 0; i < row; i++) {
-        if (numberReportsSafe[i] == 1) {
-            total++;
-        }
-    }
 
-    fprintf(fres, "|-------------------------------|\n");
-    fprintf(fres, "| Total Report Safe: %-5ld      |\n", total);
-    fprintf(fres, "|-------------------------------|\n");
 
-    for (int i = 0; i < row; i++) {
-        fprintf(fres, "| Report %0.5d | %5s          |\n", i + 1, numberReportsSafe[i] == 1 ? "True " : "False");
-    }
 
-    fprintf(fres, "|-------------------------------|\n");
+    // char line[100];
+    // int row = 0;
+    // while (fgets(line, sizeof(line), fdat)) {
+    //     int col = 0;
+    //     char *token = strtok(line, " ");
+    //     while (token != NULL) {
+    //         report[col] = atoi(token);
+    //         col++;
+    //         token = strtok(NULL, " ");
+    //     }
+
+        
+
+    //     row++;
+    // }
+
+    fprintf(fres, "| Total Report Safe 2: %-5ld   |\n", numberReportsSafe2);
+    fprintf(fres, "|------------------------------|\n");
 }
