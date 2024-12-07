@@ -31,17 +31,19 @@ int numberRepeatElement(long number, long arr[], int size) {
 
 
 int main() {
-    FILE *fdat, *fres;
-    fdat = fopen("input.txt", "r");
-    fres = fopen("output.txt", "w");
+    FILE *fileInput, *fileOutput;
+    fileInput = fopen("input.txt", "r");
+    fileOutput = fopen("output.txt", "w");
 
     long totalDistance1 = 0;
     long totalDistance2 = 0;
     long numberLeft[NUMBER_LINE], numberRight[NUMBER_LINE];
 
     for (int i = 0; i < 1000; i++) {
-        fscanf(fdat, "%5d %5d", &numberLeft[i], &numberRight[i]);
+        fscanf(fileInput, "%5d %5d", &numberLeft[i], &numberRight[i]);
     }
+
+    fclose(fileInput);
 
 
 
@@ -54,8 +56,8 @@ int main() {
         totalDistance1 += labs(numberLeft[i] - numberRight[i]);
     }
     
-    fprintf(fres, "|-----------------------------|\n");
-    fprintf(fres, "| Total Distance 1: %-9ld |\n", totalDistance1);
+    fprintf(fileOutput, "|-----------------------------|\n");
+    fprintf(fileOutput, "| Total Distance 1: %-9ld |\n", totalDistance1);
 
 
 
@@ -64,6 +66,11 @@ int main() {
         totalDistance2 += numberLeft[i] * numberRepeatElement(numberLeft[i], numberRight, NUMBER_LINE);
     }
 
-    fprintf(fres, "| Total Distance 2: %-9ld |\n", totalDistance2);
-    fprintf(fres, "|-----------------------------|\n");
+    fprintf(fileOutput, "| Total Distance 2: %-9ld |\n", totalDistance2);
+    fprintf(fileOutput, "|-----------------------------|\n");
+
+
+    fclose(fileOutput);
+
+    return 0;
 }
