@@ -11,7 +11,7 @@ Chaque jour contient les fichiers suivants :
 
 ## Progression
 
-Nombre d'etoiles: 4 :star:
+Total: 3 / 25 (6 :star:)
 
 - [X] Day 1
   - [X] Part 1
