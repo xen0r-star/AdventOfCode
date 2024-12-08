@@ -11,7 +11,7 @@ Chaque jour contient les fichiers suivants :
 
 ## Progression
 
-Total: 3 / 25 (7 :star:)
+Total: 5 / 25 (11 :star:)
 
 - [X] Day 1
   - [X] Part 1
@@ -19,9 +19,9 @@ Total: 3 / 25 (7 :star:)
 - [X] Day 2
   - [X] Part 1
   - [X] Part 2
-- [ ] Day 3
-  - [ ] Part 1
-  - [ ] Part 2
+- [X] Day 3
+  - [X] Part 1
+  - [X] Part 2
 - [X] Day 4
   - [X] Part 1
   - [X] Part 2
